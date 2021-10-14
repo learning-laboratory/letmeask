@@ -1,13 +1,17 @@
-import { Button } from "./components/Button";
+import { Home } from "./pages/Home";
+import { CreateRoom } from "./pages/CreateRoom";
+import { BrowserRouter, Route } from "react-router-dom";
+import { AuthContextProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <div>
-      <h1>Ola Mundo!</h1>
-      <Button text="Click"/>
-      <Button/>
-    </div>
-  )
+    <BrowserRouter>
+    <AuthContextProvider>
+        <Route path="/" exact={true} component={Home} />
+        <Route path="/rooms/create" component={CreateRoom} />
+        </AuthContextProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;
