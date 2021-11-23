@@ -2,13 +2,14 @@ import illustrationImg from "../assets/images/illustration.svg";
 import logoImg from "../assets/images/logo.svg";
 import "../styles/auth.scss";
 import { Button } from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import { database } from "../services/firebase";
 import { useAuth } from "../hooks/useAuth";
 
 export function CreateRoom() {
   const { user } = useAuth();
+  const history = useHistory();
   const [nameRoom, setNameRoom] = useState("");
   async function handleSaveRoom(event: FormEvent) {
     event.preventDefault();
@@ -21,7 +22,10 @@ export function CreateRoom() {
       name: nameRoom,
       authorId: user?.id,
     });
+
+    history.push(`/rooms/${firebaseRoom.key}`)
   }
+
 
   return (
     <div id="page-auth">
